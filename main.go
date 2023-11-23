@@ -18,7 +18,7 @@ func main() {
 
 	// SOLO PARA LOCAL!
 	// TODO: DESACTIVAR EN CASO DE MIGRACION REAL O PROD:
-	err := db.GetGormDB().AutoMigrate(&models.Poliza{}, &models.VehiculosModel{}, &models.Domicilio{})
+	err := db.GetGormDB().AutoMigrate(&models.Poliza{}, &models.VehiculosModel{}, &models.Domicilio{}, &models.Cobertura{})
 	if err != nil {
 		log.Fatal(err)
 	}
