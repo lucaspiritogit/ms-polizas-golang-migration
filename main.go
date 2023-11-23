@@ -2,7 +2,6 @@ package main
 
 import (
 	"demo/db"
-	"demo/models"
 	"demo/routes"
 	"log"
 
@@ -18,10 +17,11 @@ func main() {
 
 	// SOLO PARA LOCAL!
 	// TODO: DESACTIVAR EN CASO DE MIGRACION REAL O PROD:
-	err := db.GetGormDB().AutoMigrate(&models.Poliza{}, &models.VehiculosModel{}, &models.Domicilio{}, &models.Cobertura{})
-	if err != nil {
-		log.Fatal(err)
-	}
+	// err := db.GetGormDB().AutoMigrate(&models.Poliza{}, &models.VehiculosModel{}, &models.Domicilio{}, &models.Cobertura{})
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+	
 	router := gin.Default()
 
 	routes.SetupRoutes(router)
