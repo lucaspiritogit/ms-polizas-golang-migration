@@ -8,5 +8,5 @@ import (
 
 func SetupRoutes(routes *gin.Engine) {
 
-	routes.POST("/api/poliza/auto", handlers.AltaPolizaVehiculo)
+	routes.POST("/api/poliza/auto/alta", handlers.AltaPolizaVehiculo)
 }

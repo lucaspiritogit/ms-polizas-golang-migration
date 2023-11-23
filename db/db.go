@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+	"time"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/driver/sqlserver"
@@ -50,8 +51,9 @@ func InitializeSQLSERVERDB() error {
 		return err
 	}
 
-	db.SetMaxOpenConns(30)
+	db.SetMaxOpenConns(50)
 	db.SetMaxIdleConns(15)
+	db.SetConnMaxLifetime(time.Minute + 10)
 
 	err = db.Ping()
 	if err != nil {

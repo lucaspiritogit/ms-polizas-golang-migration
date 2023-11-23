@@ -12,7 +12,7 @@ import (
 func ValidarBindingDelJSON(c *gin.Context, err error) {
 	switch err.(type) {
 	case *json.SyntaxError:
-		c.JSON(http.StatusBadRequest, gin.H{"error": fmt.Sprintf("Error de sintaxis en el JSON: %v", err)})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Error de sintaxis en el JSON"})
 	case *json.UnmarshalTypeError:
 		fieldName := err.(*json.UnmarshalTypeError).Field
 		c.JSON(http.StatusBadRequest, gin.H{"error": fmt.Sprintf("Error al decodificar el campo '%s'. El tipo de dato especificado es incorrecto.", fieldName)})

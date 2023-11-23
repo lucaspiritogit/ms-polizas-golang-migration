@@ -145,6 +145,11 @@ func altaDePoliza(vehiculoPolizaDTO dtos.VehiculoPolizaDTO, tx *gorm.DB, c *gin.
 func altaDeVehiculos(vehiculoPolizaDTO dtos.VehiculoPolizaDTO, poliza models.Poliza, tx *gorm.DB, c *gin.Context) error {
 	var vehiculos []models.VehiculosModel
 
+	var coberturasList [][]dtos.CoberturaDTO
+	for _, vehiculoDTO := range vehiculoPolizaDTO.VehiculoDTO {
+		coberturasList = append(coberturasList, vehiculoDTO.CoberturaDTO)
+	}
+
 	for id, vehiculoDTO := range vehiculoPolizaDTO.VehiculoDTO {
 		vehiculo := models.VehiculosModel{
 			IDPoliza:             poliza.IDPoliza,
@@ -154,7 +159,7 @@ func altaDeVehiculos(vehiculoPolizaDTO dtos.VehiculoPolizaDTO, poliza models.Pol
 		}
 		vehiculos = append(vehiculos, vehiculo)
 
-		if err := altaDeCoberturas(vehiculoDTO.CoberturaDTO, poliza, vehiculo, id, tx, c); err != nil {
+		if err := altaDeCoberturas(coberturasList[id], poliza, vehiculo, id, tx, c); err != nil {
 			handleError(tx, c, err)
 			return err
 		}
@@ -169,6 +174,7 @@ func altaDeVehiculos(vehiculoPolizaDTO dtos.VehiculoPolizaDTO, poliza models.Pol
 
 func altaDeCoberturas(coberturasDTO []dtos.CoberturaDTO, poliza models.Poliza, vehiculo models.VehiculosModel, idAuto int, tx *gorm.DB, c *gin.Context) error {
 	var coberturas []models.Cobertura
+
 	for id, coberturaDTO := range coberturasDTO {
 		cobertura := models.Cobertura{
 			IDVehiculo:              idAuto,
