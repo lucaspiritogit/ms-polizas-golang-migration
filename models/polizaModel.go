@@ -5,6 +5,7 @@ func (Poliza) TableName() string {
 }
 
 type Poliza struct {
+	IDPoliza            string `json:"idPoliza" gorm:"column:ID_POLIZA;type:varchar(50);not null;primaryKey;default:gen_random_uuid()"`
 	NroExpediente       string `json:"nroExpediente" gorm:"column:NRO_EXPEDIENTE;type:varchar(50);not null"`
 	CodigoCompania      string `json:"codigoCompania" gorm:"column:CODIGO_COMPANIA;type:varchar(4);not null"`
 	Cuit                int64  `json:"cuit" gorm:"column:CUIT;type:bigint;not null"`

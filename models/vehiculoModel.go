@@ -4,13 +4,13 @@ import (
 	"time"
 )
 
-func (Vehiculo) TableName() string {
+func (VehiculosModel) TableName() string {
 	return "SSNT_GED.NEGO_VEHICULOS"
 }
 
-type Vehiculo struct {
-	Poliza
-	Domicilio
+type VehiculosModel struct {
+	IDVehiculo			 int64     `gorm:"column:ID_VEHICULO;type:numeric(10);not null;primaryKey"`
+	IDPoliza			 string	   `gorm:"column:ID_POLIZA;type:varchar(50);not null"`
 	TipoVehiculo         string    `json:"tipoVehiculo" gorm:"column:TIPO_VEHICULO;type:varchar(2);not null"`
 	Patente              string    `json:"patente" gorm:"column:PATENTE;type:varchar(20);not null"`
 	UbicacionRiesgo      string    `json:"ubicacionRiesgo" gorm:"column:UBICACION_RIESGO;type:varchar(8);not null"`

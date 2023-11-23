@@ -5,6 +5,10 @@ import (
 	"time"
 )
 
+func (Domicilio) TableName() string {
+	return "SSNT_GED.NEGO_DOMICILIO"
+}
+
 type Domicilio struct {
 	IDDomicilio          int64     `json:"idDomicilio" gorm:"column:ID_DOMICILIO;type:bigint;autoIncrement;primaryKey"`
 	IDPoliza             string    `json:"idPoliza" gorm:"column:ID_POLIZA;type:varchar(50);not null"`

@@ -2,6 +2,7 @@ package main
 
 import (
 	"demo/db"
+	"demo/models"
 	"demo/routes"
 	"log"
 
@@ -15,12 +16,19 @@ func main() {
 		log.Fatal("Error initializing database:", err)
 	}
 
+	// SOLO PARA LOCAL!
+	// TODO: DESACTIVAR EN CASO DE MIGRACION REAL O PROD:
+	err := db.GetGormDB().AutoMigrate(&models.Poliza{}, &models.VehiculosModel{}, &models.Domicilio{})
+	if err != nil {
+		log.Fatal(err)
+	}
 	router := gin.Default()
 
 	routes.SetupRoutes(router)
 
-	err := router.Run(port)
-	if err != nil {
+	if err := router.Run(port); err != nil {
 		log.Fatal("Error inicializando MS_Polizas:", err)
 	}
 }
+
+
