@@ -50,6 +50,9 @@ func InitializeSQLSERVERDB() error {
 		return err
 	}
 
+	db.SetMaxOpenConns(30)
+	db.SetMaxIdleConns(15)
+
 	err = db.Ping()
 	if err != nil {
 		return err
@@ -59,7 +62,7 @@ func InitializeSQLSERVERDB() error {
 	if err != nil {
 		return err
 	}
-	
+
 	log.Println("Database connection initialized successfully.")
 	return nil
 }

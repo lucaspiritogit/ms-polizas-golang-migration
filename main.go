@@ -11,7 +11,7 @@ import (
 func main() {
 	port := ":8100"
 
-	if err := db.InitializeDB(); err != nil {
+	if err := db.InitializeSQLSERVERDB(); err != nil {
 		log.Fatal("Error initializing database:", err)
 	}
 
@@ -21,7 +21,7 @@ func main() {
 	// if err != nil {
 	// 	log.Fatal(err)
 	// }
-	
+
 	router := gin.Default()
 
 	routes.SetupRoutes(router)
@@ -30,5 +30,3 @@ func main() {
 		log.Fatal("Error inicializando MS_Polizas:", err)
 	}
 }
-
-

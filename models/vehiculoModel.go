@@ -9,8 +9,8 @@ func (VehiculosModel) TableName() string {
 }
 
 type VehiculosModel struct {
-	IDVehiculo			 int64     `gorm:"column:ID_VEHICULO;type:numeric(10);not null;primaryKey"`
-	IDPoliza			 string	   `gorm:"column:ID_POLIZA;type:varchar(50);not null"`
+	IDVehiculo           int       `gorm:"column:ID_VEHICULO;type:numeric(10);not null;primaryKey"`
+	IDPoliza             string    `gorm:"column:ID_POLIZA;type:varchar(50);not null;primaryKey"`
 	TipoVehiculo         string    `json:"tipoVehiculo" gorm:"column:TIPO_VEHICULO;type:varchar(2);not null"`
 	Patente              string    `json:"patente" gorm:"column:PATENTE;type:varchar(20);not null"`
 	UbicacionRiesgo      string    `json:"ubicacionRiesgo" gorm:"column:UBICACION_RIESGO;type:varchar(8);not null"`
