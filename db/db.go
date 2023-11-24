@@ -9,6 +9,7 @@ import (
 	"gorm.io/driver/postgres"
 	"gorm.io/driver/sqlserver"
 	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
 )
 
 var gormDB *gorm.DB
@@ -16,7 +17,9 @@ var gormDB *gorm.DB
 func InitializeDB() error {
 	cnxn := "postgres://postgres:postgres@localhost:5432/POLONLINEGW?sslmode=disable"
 
-	db, err := gorm.Open(postgres.Open(cnxn), &gorm.Config{})
+	db, err := gorm.Open(postgres.Open(cnxn), &gorm.Config{
+		Logger: logger.Default.LogMode(logger.Info),
+	})
 	if err != nil {
 		return err
 	}
@@ -30,6 +33,8 @@ func InitializeDB() error {
 	}
 
 	gormDB = db
+
+	
 
 	log.Println("Database connection initialized successfully.")
 	return nil
@@ -54,7 +59,7 @@ func InitializeSQLSERVERDB() error {
 	db.SetMaxOpenConns(50)
 	db.SetMaxIdleConns(15)
 	db.SetConnMaxLifetime(time.Minute + 10)
-
+	
 	err = db.Ping()
 	if err != nil {
 		return err
